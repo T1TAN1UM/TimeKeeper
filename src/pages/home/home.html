@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{AppTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list *ngIf="!isFirstTimer">
+    <button ion-item *ngFor="let item of timeSheetList" (click)="viewTimeSheet(item)">
+    {{ item }}
+  </button>
+  </ion-list>
+  <ion-slides pager *ngIf="isFirstTimer">
+    <ion-slide *ngFor="let slide of slides">
+      <img [src]="slide.image" class="slide-image" />
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/slide-4.png" class="slide-image" />
+      <h2 class="slide-title">That's all there is !!!</h2>
+      <p>This way the app automatically takes note of the time you spent on each task, so before you leave for the day, the
+        app can give you a summary of the enire days tasks.</p>
+      <p>You can use the summary to fill JIRA / Company's Effort Tracker much faster this way.</p>
+      <button ion-button large clear icon-end color="primary" (click)="skipIntro()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+  <!--<div *ngIf="!isFirstTimer">
+    <ion-fab right bottom>
+      <button ion-fab color="secondary" (click)="newTimeSheet()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+  </div>-->
+</ion-content>

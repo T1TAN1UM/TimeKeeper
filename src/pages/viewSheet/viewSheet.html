@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{currentSheet}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ng-template ngFor let-item [ngForOf]="currentTaskList">
+    <ion-card>
+      <ion-card-header>
+        {{item.taskTitle}}
+      </ion-card-header>
+      <ion-card-content>
+        <p>JIRA ID : {{(item.taskJIRAID ? item.taskJIRAID : "None")}}</p>
+        <p>Description : {{item.taskDescription}}</p>
+        <p>Started : {{item.startTime}}</p>
+        <p *ngIf="!item.isRunning">Ended : {{item.endTime}}</p>
+        <p *ngIf="!item.isRunning">Hours taken : {{item.hoursSpent.toFixed(2)}}</p>
+        <p *ngIf="!item.isRunning">Minutes taken : {{item.minutesSpent}}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

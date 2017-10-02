@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Timesheet ( {{today.getDate() + ' ' + this.monthNames[today.getMonth()] + ' ' + today.getFullYear()}} )
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ng-template ngFor let-item [ngForOf]="currentTaskList" let-last="last">
+    <ion-card>
+      <ion-card-header>
+        {{item.taskTitle}}
+      </ion-card-header>
+      <ion-card-content>
+        <p>JIRA ID : {{(item.taskJIRAID ? item.taskJIRAID : "None")}}</p>
+        <p>Description : {{item.taskDescription}}</p>
+        <p>Started : {{item.startTime}}</p>
+        <p *ngIf="!item.isRunning">Ended : {{item.endTime}}</p>
+        <button ion-button color="danger" small round *ngIf="item.isRunning && last" (click)="endTask(item)">End Task &#160; <ion-icon name="square"></ion-icon></button>
+        <button ion-button color="secondary" small round *ngIf="!item.isRunning && last" (click)="this.openModal({charNum: 0})">Next Task &#160; <ion-icon name="play"></ion-icon></button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <button ion-button color="secondary" small *ngIf="currentTaskList.length == 0" (click)="this.openModal({charNum: 0})">New Task &#160; <ion-icon name="add"></ion-icon></button>
+    <div id="table_wrapper"><table id="apps"></table></div>
+  <!--<ion-fab right bottom color="fabcustom">
+    <button ion-fab><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="fabmini" (click)="this.exportTimesheet($event)"><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab color="fabmini" (click)="this.openModal({charNum: 0})"><ion-icon name="add"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>-->
+</ion-content>
